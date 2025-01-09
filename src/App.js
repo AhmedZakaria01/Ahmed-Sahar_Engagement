@@ -43,7 +43,6 @@ export default function App() {
       </div>
 
       <Home />
- 
 
       <Fireworks
         ref={ref}
