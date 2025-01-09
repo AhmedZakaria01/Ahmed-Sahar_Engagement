@@ -14,7 +14,7 @@ const OpenGoogleMaps = () => {
     );
 
     const googleMapsUrl = `https://www.google.com/maps?q=${encodedAddress}`;
-    window.open(googleMapsUrl, "_blank");
+    window.open(googleMapsUrl);
   };
 
   return (
