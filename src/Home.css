@@ -1,0 +1,33 @@
+.header {
+    padding: 0px;
+    margin: 0px;
+    height: 100vh;
+    background-image: url('./assets//us sm.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+
+@media screen and (min-width: 768px) {
+    .header {
+        background-image: url('./assets/us md.png');
+    }
+}
+@media screen and (min-width: 1200px) {
+    .header {
+        background-image: url('./assets/us lg.png');
+    }
+} 
+
+/* Home.css */
+.header {
+  position: relative;
+  height: 100vh;
+}
+
+.background-image img {
+  width: 100% !important;
+  height: 100vh !important;
+  object-fit: cover; /* Optional: to make sure the image covers the entire viewport */
+}
