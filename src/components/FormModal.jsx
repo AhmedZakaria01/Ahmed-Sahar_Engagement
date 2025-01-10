@@ -1,28 +1,38 @@
 // src/components/FormModal.jsx
 import React, { useState } from "react";
-
+import supabase from "../supabase";
 const FormModal = ({ onClose }) => {
-  const [name, setName] = useState("");
-  const [message, setMessage] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    message: "",
+  });
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const { data: insertedData, error } = await supabase
+      .from("messages") // Replace with your actual table name
+      .insert([formData]);
 
-    // Simulate submitting the data to a storage (e.g., a server or local JSON)
-    const formData = { name, message };
-
-    // Log data to console (simulate storage)
-    console.log("Form submitted:", formData);
-
-    // You can save data to localStorage, a JSON file, or an API endpoint here
-
-    // Close the modal after submission
-    onClose();
+    if (error) {
+      console.error("Error inserting data:", error);
+    } else {
+      console.log("Data inserted successfully:", insertedData);
+      // Optionally reset the form and close the modal
+      setFormData({ name: "", message: "" });
+      onClose();
+    }
   };
 
   return (
     <div className="bg-white/90 p-6 rounded-md shadow-md w-80">
-      <h2 className="text-xl text-center font-semibold mb-4">Leave Us A Comment</h2>
+      <h2 className="text-l text-center font-semibold mb-4">
+        kindly leave us a comment ♥
+      </h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label
@@ -34,8 +44,9 @@ const FormModal = ({ onClose }) => {
           <input
             type="text"
             id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
             className="mt-1 p-2 w-full border border-gray-300 rounded-md"
             placeholder="Your name"
             required
@@ -51,8 +62,9 @@ const FormModal = ({ onClose }) => {
           </label>
           <textarea
             id="message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
             className="mt-1 p-2 w-full border border-gray-300 rounded-md"
             placeholder="Your message"
             required
@@ -62,14 +74,14 @@ const FormModal = ({ onClose }) => {
         <div className="flex justify-between">
           <button
             type="submit"
-            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all"
+            className="px-3 py-1 bg-blue-500 text-white text-sm rounded-md hover:bg-blue-600 transition-all"
           >
             Submit
           </button>
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 bg-gray-300 text-black rounded-lg hover:bg-gray-400 transition-all"
+            className="px-3 py-1 bg-gray-300 text-black text-sm rounded-md hover:bg-gray-400 transition-all"
           >
             Close
           </button>

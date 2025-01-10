@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Fireworks } from "@fireworks-js/react";
 import Home from "./Home";
 import FormModal from "./components/FormModal"; // Make sure this is the correct path
@@ -22,6 +22,18 @@ export default function App() {
 
   const handleOpenModal = () => setShowModal(true); // Open the modal
   const handleCloseModal = () => setShowModal(false); // Close the modal
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowModal(true);
+    }, 3000);
+
+    return () => {
+      clearTimeout(() => {
+        setShowModal(false);
+      });
+    };
+  }, []);
 
   return (
     <>
