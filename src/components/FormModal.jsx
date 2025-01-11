@@ -49,7 +49,7 @@ const FormModal = ({ onClose }) => {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+            className="mt-1 p-2 w-full border text-sm border-gray-300 rounded-md"
             placeholder="Your name"
             required
           />
@@ -67,15 +67,21 @@ const FormModal = ({ onClose }) => {
             name="to"
             value={formData.to}
             onChange={handleChange}
-            className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+            className="mt-1 p-2 w-full border text-sm border-gray-300 rounded-md"
             required
           >
-            <option value="" disabled>
+            <option value="" className="text-sm" disabled>
               Select a name
             </option>
-            <option value="Ahmed">Ahmed</option>
-            <option value="Sahar">Sahar</option>
-            <option value="Ahmed & Sahar">Ahmed & Sahar</option>
+            <option className="text-sm" value="Ahmed">
+              Ahmed
+            </option>
+            <option className="text-sm" value="Sahar">
+              Sahar
+            </option>
+            <option className="text-sm" value="Ahmed & Sahar">
+              Ahmed & Sahar
+            </option>
           </select>
         </div>
 
@@ -91,14 +97,14 @@ const FormModal = ({ onClose }) => {
             name="message"
             value={formData.message}
             onChange={handleChange}
-            className="mt-1 p-2 w-full border border-gray-300 rounded-md"
-            placeholder="Your message"
+            className="mt-1 text-sm p-2 w-full border border-gray-300 rounded-md"
+            placeholder="Kindly write your message here"
             required
           />
         </div>
         <span className="text-[12px] text-gray-500 mb-4 block text-center">
-          Messages Are Secured ,<br /> Only{" "}
-          <strong className="text-sky-700">Ahmed</strong> and
+          Messages Are Private and Secured ,<br /> Only
+          <strong className="text-sky-700"> Ahmed</strong> and
           <strong className="text-sky-700"> Sahar</strong> can access the
           messages .
         </span>
