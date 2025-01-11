@@ -26,7 +26,7 @@ export default function App() {
   useEffect(() => {
     setTimeout(() => {
       setShowModal(true);
-    }, 3000);
+    }, 5000);
 
     return () => {
       clearTimeout(() => {
