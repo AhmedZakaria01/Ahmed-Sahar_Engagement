@@ -1,6 +1,6 @@
-// src/components/FormModal.jsx
 import React, { useState } from "react";
 import supabase from "../supabase";
+
 const FormModal = ({ onClose }) => {
   const [formData, setFormData] = useState({
     name: "",
@@ -8,32 +8,42 @@ const FormModal = ({ onClose }) => {
     message: "",
   });
 
+  // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    console.log(formData);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Add current time to the formData object
+    const currentTime = new Date().toISOString(); // Current timestamp
+
+    const dataToInsert = {
+      ...formData,
+      created_at: currentTime, // Add created_at field with the timestamp
+    };
+
+    // Insert data into the Supabase database
     const { data: insertedData, error } = await supabase
-      .from("messages") // Replace with your actual table name
-      .insert([formData]);
+      .from("messages")
+      .insert([dataToInsert]);
 
     if (error) {
       console.error("Error inserting data:", error);
     } else {
       console.log("Data inserted successfully:", insertedData);
-      // Optionally reset the form and close the modal
-      setFormData({ name: "", message: "" });
-      onClose();
+      setFormData({ name: "", to: "", message: "" }); // Reset form data
+      onClose(); // Close the form
+      // Optionally, you can fetch messages again after submission
     }
   };
 
   return (
-    <div className="bg-white/90 p-6 rounded-md shadow-md w-80">
+    <div className="bg-violet-300/90 p-6 rounded-md shadow-md w-80">
       <h2 className="text-l text-center font-semibold mb-4">
-        kindly leave us a message ♥
+        Kindly leave us a message ♥
       </h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -50,20 +60,19 @@ const FormModal = ({ onClose }) => {
             value={formData.name}
             onChange={handleChange}
             className="mt-1 p-2 w-full border text-sm border-gray-300 rounded-md"
-            placeholder="Your name"
+            placeholder="your name"
             required
           />
         </div>
         <div className="mb-4">
           <label
-            htmlFor="name"
+            htmlFor="to"
             className="block text-sm font-medium text-gray-700"
           >
             To
           </label>
           <select
             id="to"
-            to="to"
             name="to"
             value={formData.to}
             onChange={handleChange}
@@ -73,10 +82,10 @@ const FormModal = ({ onClose }) => {
             <option value="" className="text-sm" disabled>
               Select a name
             </option>
-            <option className="text-sm" value="Ahmed">
+            <option className="text-sm" value="Boyka">
               Ahmed
             </option>
-            <option className="text-sm" value="Sahar">
+            <option className="text-sm" value="Fulla">
               Sahar
             </option>
             <option className="text-sm" value="Ahmed & Sahar">
@@ -98,20 +107,20 @@ const FormModal = ({ onClose }) => {
             value={formData.message}
             onChange={handleChange}
             className="mt-1 text-sm p-2 w-full border border-gray-300 rounded-md"
-            placeholder="Kindly write your message here"
+            placeholder="write your message here"
             required
           />
         </div>
-        <span className="text-[12px] text-gray-500 mb-4 block text-center">
+        <span className="text-[12px] text-gray-700 mb-4 block text-center">
           Messages Are Private and Secured ,<br /> Only
-          <strong className="text-sky-700"> Ahmed</strong> and
-          <strong className="text-sky-700"> Sahar</strong> can access the
-          messages .
+          <strong className="text-violet-600"> Ahmed</strong> and
+          <strong className="text-violet-600"> Sahar</strong> can access the
+          messages.
         </span>
         <div className="flex justify-between">
           <button
             type="submit"
-            className="px-3 py-1 bg-sky-700 text-white text-sm rounded-md hover:bg-sky-600 transition-all"
+            className="px-3 py-1 bg-violet-700 text-white text-sm rounded-md hover:bg-violet-600 transition-all"
           >
             Send ♥
           </button>

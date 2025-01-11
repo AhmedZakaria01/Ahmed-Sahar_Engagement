@@ -20,7 +20,7 @@ const OpenGoogleMaps = () => {
   return (
     <button
       onClick={openGoogleMaps}
-      className="fixed top-2 text-sm left z-10 px-3 py-1 text-white rounded-r-lg shadow-lg hover:opacity-90 transition-all flex items-center gap-2 bg-gradient-to-r from-[#252720] via-[#3C3C3C] to-[#5F5F5F]"
+      className="fixed top-2 text-sm left z-10 px-3 py-1 text-white rounded-r-lg shadow-lg hover:opacity-90 transition-all flex items-center gap-2 bg-gradient-to-r from-[#7c6659] via-[#774242] to-[#b55858]  "
     >
       Location
       <FontAwesomeIcon icon={faLocationDot} className="px-2 text-white" />
