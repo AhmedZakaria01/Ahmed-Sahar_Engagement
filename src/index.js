@@ -1,8 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import './index.css'; // Ensure Tailwind CSS is imported
+import "./index.css"; // Ensure Tailwind CSS is imported
 
 import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <App />
+  </BrowserRouter>
+);
